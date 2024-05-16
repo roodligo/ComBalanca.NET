@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO.Ports;
+using System.Text.RegularExpressions;
 
 namespace ComPortRead
 {
@@ -44,19 +45,36 @@ namespace ComPortRead
 
         static void ReadResponse()
         {
-            // Espera um pouco para a resposta chegar
-            System.Threading.Thread.Sleep(1000);  // Ajuste o tempo conforme a necessidade e a velocidade da resposta do seu dispositivo
+            Thread.Sleep(700); 
 
             if (port.BytesToRead > 0)
             {
-                string response = port.ReadExisting();  // Lê os dados disponíveis enviados pelo dispositivo
+                string response = port.ReadExisting();
+
                 Console.WriteLine("Dados recebidos:");
                 Console.WriteLine(response);
+
+                decimal peso = ConvertToDecimal(response);
+                string formattedWeight = FormatWeight(peso);
+
+                Console.WriteLine($"Peso formatado: {formattedWeight} kg");
             }
             else
             {
                 Console.WriteLine("Nenhuma resposta recebida.");
             }
+        }
+
+        static decimal ConvertToDecimal(string data)
+        {
+            string cleanData = Regex.Replace(data, "[^0-9]", "");
+            int numericData = int.Parse(cleanData);
+            return numericData / 1000m;
+        }
+
+        static string FormatWeight(decimal weight)
+        {
+            return weight.ToString("N3", System.Globalization.CultureInfo.GetCultureInfo("pt-BR"));
         }
 
         static void ClosePort()
