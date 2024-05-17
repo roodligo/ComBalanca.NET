@@ -1,6 +1,6 @@
 # ComBalanca.NET
 
-Este projeto é uma aplicação em C# para comunicação com uma balança através de uma porta serial. Ele solicita o peso da balança, lê a resposta, converte e formata o peso para exibição.
+Este projeto é uma aplicação em C# para comunicação com uma balança através de uma porta serial. Ele solicita o peso da balança, lê a resposta, converte e formata o peso para exibição. Testes feitos com balança prix 3 fit.
 
 ## Funcionalidades
 
