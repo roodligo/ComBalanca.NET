@@ -2,7 +2,7 @@
 using System.IO.Ports;
 using System.Text.RegularExpressions;
 
-namespace ComPortRead
+namespace ComBalanca.NET
 {
     class Program
     {
